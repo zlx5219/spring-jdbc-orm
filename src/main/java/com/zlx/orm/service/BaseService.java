@@ -11,6 +11,15 @@ public interface BaseService<T>
 {
 	public int add(T obj) throws ServiceException;
 
+	/**
+	 * 添加数据
+	 * 数据库中表的主键由数据库生成，返回数据库自增的主键
+	 * @param obj
+	 * @return
+	 * @throws ServiceException
+	 */
+	public int addReturnKey(T obj) throws ServiceException;
+
 	public int update(T obj) throws ServiceException;
 
 	public int delete(Class<T> objClass, Serializable id) throws ServiceException;

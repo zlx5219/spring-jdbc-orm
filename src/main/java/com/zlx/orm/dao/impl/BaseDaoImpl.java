@@ -1,6 +1,10 @@
 package com.zlx.orm.dao.impl;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +13,9 @@ import javax.annotation.Resource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
 import com.zlx.orm.BaseEntity;
 import com.zlx.orm.PageInfo;
@@ -32,6 +39,12 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T>
 	{
 		CombineSql comSql = CombineSqlUtils.createInster(obj);
 		return this.updateSqlByCombineSql(comSql);
+	}
+	
+	public int addReturnKey(T obj) throws DataAccessException, Exception
+	{
+		CombineSql comSql = CombineSqlUtils.createInster(obj);
+		return this.insertByCombineSqlReturnKey(comSql);
 	}
 
 	public int update(T obj) throws Exception
@@ -96,6 +109,52 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T>
 		catch (EmptyResultDataAccessException e)
 		{
 			return 0;
+		}
+	}
+	
+	/**
+	 * 
+	 * @param sql
+	 * @return
+	 * @throws DataAccessException
+	 * @throws Exception
+	 */
+	protected int insertByCombineSqlReturnKey(final CombineSql sql) throws DataAccessException, Exception
+	{
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+
+		try
+		{
+			this.jdbcTemplate.update(new PreparedStatementCreator()
+				{
+					@Override
+					public PreparedStatement createPreparedStatement(Connection con) throws SQLException
+					{
+						PreparedStatement ps;
+						List<Object> param = sql.getParam();
+						try
+						{
+							ps = con.prepareStatement(sql.getSql(), Statement.RETURN_GENERATED_KEYS);
+							for (int n = 1; n <= param.size(); n++)
+							{
+								ps.setObject(n, param.get(n - 1));
+							}
+							return ps;
+						}
+						catch (Exception e)
+						{
+							//logger.error("add return key error:", e);
+							throw new SQLException(e);
+						}
+						
+					}
+				}, keyHolder);
+			return keyHolder.getKey().intValue();
+		}
+		catch(Exception e)
+		{
+			//logger.error("add return key error:", e);
+			throw e;
 		}
 	}
 

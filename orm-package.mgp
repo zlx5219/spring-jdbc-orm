@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PackageAnalysis>
+    <Package name="com" x="203" y="145"/>
+    <Package name="com.zlx.orm.annotation" x="538" y="83"/>
+    <Package name="com.zlx.orm.dao" x="305" y="222"/>
+    <Package name="com.zlx.orm.expression" x="319" y="81"/>
+    <Package name="com.zlx.orm.service" x="308" y="275"/>
+    <Package name="com.zlx.orm.sql" x="288" y="158">
+        <DependencyLink destination="com.zlx.orm.annotation"/>
+        <DependencyLink destination="com.zlx.orm.expression"/>
+    </Package>
+    <Package name="com.zlx.orm.util" x="541" y="229">
+        <DependencyLink destination="com.zlx.orm.annotation"/>
+        <DependencyLink destination="com.zlx.orm.expression"/>
+    </Package>
+</PackageAnalysis>

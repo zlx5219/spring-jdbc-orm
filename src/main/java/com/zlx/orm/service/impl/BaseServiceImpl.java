@@ -29,6 +29,18 @@ public abstract class BaseServiceImpl<T> implements BaseService<T>
 			throw new ServiceException(e);
 		}
 	}
+	
+	public int addReturnKey(T obj) throws ServiceException
+	{
+		try
+		{
+			return baseDao.addReturnKey(obj);
+		}
+		catch (Exception e)
+		{
+			throw new ServiceException(e);
+		}
+	}
 
 	public int update(T obj) throws ServiceException
 	{

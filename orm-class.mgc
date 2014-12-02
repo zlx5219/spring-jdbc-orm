@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClassDiagram>
+    <Class name="com.zlx.orm.sql.BaseCombineSql" x="215" y="11">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.zlx.orm.sql.CombineSql"/>
+    </Class>
+    <Class name="com.zlx.orm.sql.LoadCombineSql" x="51" y="165">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.zlx.orm.sql.CombineSql"/>
+    </Class>
+    <Class name="com.zlx.orm.sql.SelectPageCombineSql" x="39" y="252">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.zlx.orm.sql.CombineSql"/>
+        <Association destinationClassName="com.zlx.orm.sql.SelectQuery"
+            endpointName="query" kind="Simple"/>
+        <Communication destinationClassName="com.zlx.orm.sql.SelectQuery"/>
+    </Class>
+    <Class name="com.zlx.orm.sql.CombineSql" x="289" y="208">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="com.zlx.orm.sql.SelectCombineSql" x="559" y="159">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.zlx.orm.sql.CombineSql"/>
+    </Class>
+    <Class name="com.zlx.orm.expression.LogicalExpression" x="493" y="490">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.zlx.orm.expression.Expression"/>
+        <Association
+            destinationClassName="com.zlx.orm.expression.Expression"
+            endpointName="lexp" kind="Simple"/>
+        <Association
+            destinationClassName="com.zlx.orm.expression.Expression"
+            endpointName="rexp" kind="Simple"/>
+    </Class>
+    <Class name="com.zlx.orm.expression.PropertyExpression" x="181" y="768">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.zlx.orm.expression.Expression"/>
+    </Class>
+    <Class name="com.zlx.orm.expression.SimpleExpression" x="367" y="707">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.zlx.orm.expression.Expression"/>
+    </Class>
+    <Class name="com.zlx.orm.sql.UpdateCombineSql" x="564" y="249">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.zlx.orm.sql.CombineSql"/>
+    </Class>
+    <Class name="com.zlx.orm.sql.DeleteCombineSql" x="45" y="90">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.zlx.orm.sql.CombineSql"/>
+    </Class>
+    <Class name="com.zlx.orm.expression.AndJunctionExpression" x="470" y="852">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.zlx.orm.expression.JunctionExpression"/>
+    </Class>
+    <Class name="com.zlx.orm.sql.SelectQuery.Order" x="476" y="353">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="com.zlx.orm.expression.BetweenExpression" x="675" y="597">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.zlx.orm.expression.Expression"/>
+    </Class>
+    <Class name="com.zlx.orm.expression.OrJunctionExpression" x="652" y="854">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.zlx.orm.expression.JunctionExpression"/>
+    </Class>
+    <Class name="com.zlx.orm.expression.IsNullExpression" x="34" y="669">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.zlx.orm.expression.Expression"/>
+    </Class>
+    <Class name="com.zlx.orm.sql.SelectQuery" x="282" y="317">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.zlx.orm.sql.CombineSql"/>
+        <Association
+            destinationClassName="com.zlx.orm.expression.Expression"
+            endpointName="lstExp" kind="Simple"/>
+        <Association
+            destinationClassName="com.zlx.orm.sql.SelectQuery.Order"
+            endpointName="lstOrder" kind="Simple"/>
+        <Communication destinationClassName="com.zlx.orm.sql.CombineSql"/>
+        <Communication destinationClassName="com.zlx.orm.expression.Expression"/>
+    </Class>
+    <Class name="com.zlx.orm.expression.JunctionExpression" x="567" y="733">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.zlx.orm.expression.Expression"/>
+        <Association
+            destinationClassName="com.zlx.orm.expression.Expression"
+            endpointName="lstExp" kind="Simple"/>
+        <Communication destinationClassName="com.zlx.orm.expression.Expression"/>
+    </Class>
+    <Class name="com.zlx.orm.sql.InsertCombineSql" x="552" y="81">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.zlx.orm.sql.CombineSql"/>
+    </Class>
+    <Class name="com.zlx.orm.expression.Expression" x="294" y="592">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="com.zlx.orm.expression.InExpression" x="36" y="506">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.zlx.orm.expression.Expression"/>
+    </Class>
+</ClassDiagram>

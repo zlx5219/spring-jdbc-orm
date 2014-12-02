@@ -3,12 +3,16 @@ package com.zlx.orm.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
+
 import com.zlx.orm.PageInfo;
 import com.zlx.orm.sql.SelectQuery.Order;
 
 public interface BaseDao<T>
 {
 	public int add(T obj) throws Exception;
+
+	public int addReturnKey(T obj) throws DataAccessException, Exception;
 
 	public int update(T obj) throws Exception;
 
