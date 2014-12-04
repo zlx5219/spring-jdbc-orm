@@ -12,6 +12,14 @@ public interface BaseService<T>
 	public int add(T obj) throws ServiceException;
 
 	/**
+	 * 批量添加。
+	 * @param lstObj
+	 * @return
+	 * @throws ServiceException
+	 */
+	public int batchAdd(List<T> lstObj) throws ServiceException;
+
+	/**
 	 * 添加数据
 	 * 数据库中表的主键由数据库生成，返回数据库自增的主键
 	 * @param obj

@@ -1,6 +1,7 @@
 package com.zlx.orm.sql;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.zlx.orm.sql.SelectQuery.Order;
 
@@ -18,6 +19,11 @@ public class CombineSqlUtils
 	public static <T> CombineSql createInster(T obj)
 	{
 		return new InsertCombineSql<T>(obj);
+	}
+
+	public static <T> CombineSql createBatchInster(List<T> lstObj)
+	{
+		return new BatchInsertCombineSql<T>(lstObj);
 	}
 
 	public static <T> CombineSql createDelete(Class<T> objClass, Serializable id)

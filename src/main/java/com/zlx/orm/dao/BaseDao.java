@@ -12,6 +12,8 @@ public interface BaseDao<T>
 {
 	public int add(T obj) throws Exception;
 
+	public int[] batchAdd(List<T> lstObj) throws DataAccessException, Exception;
+
 	public int addReturnKey(T obj) throws DataAccessException, Exception;
 
 	public int update(T obj) throws Exception;

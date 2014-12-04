@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -39,6 +40,12 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T>
 	{
 		CombineSql comSql = CombineSqlUtils.createInster(obj);
 		return this.updateSqlByCombineSql(comSql);
+	}
+
+	public int[] batchAdd(List<T> lstObj) throws DataAccessException, Exception
+	{	
+		CombineSql comSql = CombineSqlUtils.createBatchInster(lstObj);
+		return this.batchUpdateSqlByCombineSql(comSql);
 	}
 	
 	public int addReturnKey(T obj) throws DataAccessException, Exception
@@ -113,7 +120,32 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T>
 	}
 	
 	/**
-	 * 
+	 * 批量执行更新语句。
+	 * @param sql
+	 * @return
+	 * @throws DataAccessException
+	 * @throws Exception
+	 */
+	protected int[] batchUpdateSqlByCombineSql(CombineSql sql) throws DataAccessException, Exception
+	{
+		List<Object[]> lstParam = new ArrayList<Object[]>();
+		for (Object param: sql.getParam())
+		{
+			if (param instanceof Object[])
+				lstParam.add((Object[])param);
+		}
+		try
+		{
+			return jdbcTemplate.batchUpdate(sql.getSql(), lstParam);
+		}
+		catch (EmptyResultDataAccessException e)
+		{
+			return new int[]{0};
+		}
+	}
+	
+	/**
+	 * 添加数据，返回数据库自增key
 	 * @param sql
 	 * @return
 	 * @throws DataAccessException

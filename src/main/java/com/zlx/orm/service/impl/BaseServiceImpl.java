@@ -29,6 +29,31 @@ public abstract class BaseServiceImpl<T> implements BaseService<T>
 			throw new ServiceException(e);
 		}
 	}
+
+	public int batchAdd(List<T> lstObj) throws ServiceException
+	{
+		int result = 1;
+		int[] batchResult;
+		try
+		{
+			batchResult = baseDao.batchAdd(lstObj);
+			//logger.info("batch add result:" + Arrays.toString(batchResult));
+
+			for (int n : batchResult)
+			{
+				if (n <= 0)
+				{
+					result = n;
+					break;
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			throw new ServiceException(e);
+		}
+		return result;
+	}
 	
 	public int addReturnKey(T obj) throws ServiceException
 	{
