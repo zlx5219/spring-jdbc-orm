@@ -65,7 +65,7 @@ public class DeleteCombineSql<T> extends BaseCombineSql<T> implements CombineSql
 		for (Field f : fields)
 		{
 			column = f.getAnnotation(TableColumn.class);
-			if (!this.valdateTableColumn(column) || !column.isKey())
+			if (!this.valdateTableColumnNullAndIncrement(column) || !column.isKey())
 				continue;
 			key = f.getName();
 			if (StringUtil.isNotEmpty(column.value()))

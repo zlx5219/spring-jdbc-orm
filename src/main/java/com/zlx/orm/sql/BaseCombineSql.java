@@ -33,7 +33,7 @@ public abstract class BaseCombineSql<T> implements CombineSql
 	}
 
 	/**
-	 * 获取字段列表
+	 * 获取字段列表(插入使用)
 	 * @return
 	 */
 	public String getFields()
@@ -46,7 +46,7 @@ public abstract class BaseCombineSql<T> implements CombineSql
 		for (Field f : fields)
 		{
 			column = f.getAnnotation(TableColumn.class);
-			if (!this.valdateTableColumn(column))
+			if (!this.valdateTableColumnNullAndIncrement(column))
 				continue;
 			key = f.getName();
 			if (StringUtil.isNotEmpty(column.value()))
@@ -75,7 +75,7 @@ public abstract class BaseCombineSql<T> implements CombineSql
 	}
 
 	/**
-	 * 获取字段数量。
+	 * 获取字段数量。（插入使用）
 	 * @return
 	 */
 	public int getFieldsCount()
@@ -84,7 +84,7 @@ public abstract class BaseCombineSql<T> implements CombineSql
 
 		for (Field f : fields)
 		{
-			if (!this.valdateTableColumn(f.getAnnotation(TableColumn.class)))
+			if (!this.valdateTableColumnNullAndIncrement(f.getAnnotation(TableColumn.class)))
 			{
 				continue;
 			}
@@ -114,7 +114,7 @@ public abstract class BaseCombineSql<T> implements CombineSql
 	 * @param column 
 	 * @return
 	 */
-	public boolean valdateTableColumn(TableColumn column)
+	public boolean valdateTableColumnNullAndIncrement(TableColumn column)
 	{
 		if (column == null || column.increment() == true)
 		{
@@ -166,7 +166,7 @@ public abstract class BaseCombineSql<T> implements CombineSql
 
 		for (Field f : fields)
 		{
-			if (!this.valdateTableColumn(f.getAnnotation(TableColumn.class)))
+			if (null == f.getAnnotation(TableColumn.class))
 				continue;
 			value = BaseEntity.getter(obj, f.getName());
 			if (!this.valdateParamDefault(value))
@@ -186,7 +186,7 @@ public abstract class BaseCombineSql<T> implements CombineSql
 
 		for (Field f : fields)
 		{
-			if (!this.valdateTableColumn(f.getAnnotation(TableColumn.class)))
+			if (!this.valdateTableColumnNullAndIncrement(f.getAnnotation(TableColumn.class)))
 				continue;
 			lstParam.add(BaseEntity.getter(obj, f.getName()));
 		}
@@ -210,7 +210,7 @@ public abstract class BaseCombineSql<T> implements CombineSql
 		for (Field f : fields)
 		{
 			column = f.getAnnotation(TableColumn.class);
-			if (!this.valdateTableColumn(column) || !column.isKey())
+			if (column == null || !column.isKey())
 				continue;
 			key = f.getName();
 			if (StringUtil.isNotEmpty(column.value()))
@@ -240,7 +240,7 @@ public abstract class BaseCombineSql<T> implements CombineSql
 		for (Field f : fields)
 		{
 			column = f.getAnnotation(TableColumn.class);
-			if (!this.valdateTableColumn(column))
+			if (column == null)
 			{
 				continue;
 			}

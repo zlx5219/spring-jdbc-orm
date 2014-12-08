@@ -72,7 +72,7 @@ public class UpdateCombineSql<T> extends BaseCombineSql<T> implements
 		for (Field f : fields)
 		{
 			column = f.getAnnotation(TableColumn.class);
-			if (!this.valdateTableColumn(column) || column.isKey())
+			if (!this.valdateTableColumnNullAndIncrement(column) || column.isKey())
 				continue;
 			key = f.getName();
 			if (StringUtil.isNotEmpty(column.value()))
@@ -97,7 +97,7 @@ public class UpdateCombineSql<T> extends BaseCombineSql<T> implements
 		for (Field f : fields)
 		{
 			column = f.getAnnotation(TableColumn.class);
-			if (!this.valdateTableColumn(column) || !column.isKey())
+			if (!this.valdateTableColumnNullAndIncrement(column) || !column.isKey())
 				continue;
 			value = BaseEntity.getter(obj, f.getName());
 			break;
@@ -114,7 +114,7 @@ public class UpdateCombineSql<T> extends BaseCombineSql<T> implements
 		for (Field f : fields)
 		{
 			column = f.getAnnotation(TableColumn.class);
-			if (!this.valdateTableColumn(f.getAnnotation(TableColumn.class))
+			if (!this.valdateTableColumnNullAndIncrement(f.getAnnotation(TableColumn.class))
 					|| column.isKey())
 				continue;
 			value = BaseEntity.getter(obj, f.getName());
