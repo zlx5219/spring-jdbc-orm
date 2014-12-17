@@ -36,6 +36,8 @@ public interface BaseService<T>
 
 	public List<T> search(T obj) throws ServiceException;
 
+	public T searchOne(T obj) throws ServiceException;
+
 	public List<T> search(T obj, int currentPage, int numPerPage) throws ServiceException;
 
 	public List<T> search(T obj, int currentPage, int numPerPage, Order... orders) throws ServiceException;

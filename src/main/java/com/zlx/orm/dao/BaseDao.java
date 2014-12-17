@@ -24,6 +24,8 @@ public interface BaseDao<T>
 
 	public List<T> search(T obj) throws Exception;
 
+	public T searchOne(T obj) throws Exception;
+
 	public List<T> search(T obj, int currentPage, int numPerPage, Order... orders) throws Exception;
 
 	public PageInfo searchPage(T obj, int currentPage, int numPerPage) throws Exception;

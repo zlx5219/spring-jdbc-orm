@@ -115,6 +115,18 @@ public abstract class BaseServiceImpl<T> implements BaseService<T>
 		}
 	}
 
+	public T searchOne(T obj) throws ServiceException
+	{
+		try
+		{
+			return baseDao.searchOne(obj);
+		}
+		catch (Exception e)
+		{
+			throw new ServiceException(e);
+		}
+	}
+
 	public List<T> search(T obj, int currentPage, int numPerPage, Order... orders) throws ServiceException
 	{
 		try

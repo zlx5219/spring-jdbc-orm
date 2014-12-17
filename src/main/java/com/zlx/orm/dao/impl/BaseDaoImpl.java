@@ -79,6 +79,17 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T>
 		return (List<T>) BaseEntity.mapToObjs(this.querySqlByCombineSql(comSql), obj.getClass());
 	}
 
+	public T searchOne(T obj) throws DataAccessException, Exception
+	{
+		List<T> lst = this.search(obj);
+		
+		if (lst == null || lst.isEmpty())
+			return null;
+		if (lst.size() > 1)
+			throw new Exception(" More than one returns the result ");
+		return lst.get(0);
+	}
+
 	@SuppressWarnings("unchecked")
 	public List<T> search(T obj, int currentPage, int numPerPage, Order... orders) throws Exception
 	{
