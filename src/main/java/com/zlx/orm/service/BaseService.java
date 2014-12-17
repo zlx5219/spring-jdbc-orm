@@ -1,6 +1,7 @@
 package com.zlx.orm.service;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 import com.zlx.orm.PageInfo;
@@ -35,6 +36,8 @@ public interface BaseService<T>
 	public T load(Class<T> objClass, Serializable id) throws ServiceException;
 
 	public List<T> search(T obj) throws ServiceException;
+
+	public List<T> searchByIds(Collection<Serializable> ids, Class<T> objClass) throws ServiceException;
 
 	public T searchOne(T obj) throws ServiceException;
 

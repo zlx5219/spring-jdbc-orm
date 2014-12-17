@@ -1,6 +1,7 @@
 package com.zlx.orm.dao;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
@@ -23,6 +24,8 @@ public interface BaseDao<T>
 	public T load(Class<T> objClass, Serializable id) throws Exception;
 
 	public List<T> search(T obj) throws Exception;
+
+	public List<T> searchByIds(Collection<Serializable> ids, Class<T> objClass) throws DataAccessException, Exception;
 
 	public T searchOne(T obj) throws Exception;
 

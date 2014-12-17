@@ -1,6 +1,7 @@
 package com.zlx.orm.service.impl;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 import com.zlx.orm.PageInfo;
@@ -108,6 +109,18 @@ public abstract class BaseServiceImpl<T> implements BaseService<T>
 		try
 		{
 			return baseDao.search(obj);
+		}
+		catch (Exception e)
+		{
+			throw new ServiceException(e);
+		}
+	}
+
+	public List<T> searchByIds(Collection<Serializable> ids, Class<T> objClass) throws ServiceException
+	{
+		try
+		{
+			return baseDao.searchByIds(ids, objClass);
 		}
 		catch (Exception e)
 		{

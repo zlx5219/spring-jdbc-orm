@@ -221,4 +221,33 @@ public abstract class BaseEntity implements Serializable
 		}
 		return map;
 	}
+
+	/**
+	 * 获取实体主键数据库字段名称。
+	 * @param objClass
+	 * @return
+	 * @throws Exception
+	 */
+	public static <T> String getKeyByClass(Class<T> objClass) throws Exception
+	{
+		Field[] lstField = objClass.getDeclaredFields();
+		TableColumn column = null;
+		String fieldName = null;
+		for (Field f : lstField)
+		{
+			column = f.getAnnotation(TableColumn.class);
+			if (column == null)
+				continue;
+			if (column.isKey())
+			{
+				fieldName = column.value();
+				if (fieldName == null || "".equals(fieldName))
+					fieldName = f.getName();
+				break;
+			}
+		}
+		if (fieldName == null || "".equals(fieldName))
+			throw new Exception("Entity primary key not found");
+		return fieldName;
+	}
 }

@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +24,9 @@ import com.zlx.orm.PageInfo;
 import com.zlx.orm.dao.BaseDao;
 import com.zlx.orm.sql.CombineSql;
 import com.zlx.orm.sql.CombineSqlUtils;
+import com.zlx.orm.sql.SelectQuery;
 import com.zlx.orm.sql.SelectQuery.Order;
+import com.zlx.orm.util.ExpressionUtil;
 
 /**
  * 基础Dao实现
@@ -77,6 +80,14 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T>
 	{
 		CombineSql comSql = CombineSqlUtils.createSelect(obj, false);
 		return (List<T>) BaseEntity.mapToObjs(this.querySqlByCombineSql(comSql), obj.getClass());
+	}
+
+	public List<T> searchByIds(Collection<Serializable> ids, Class<T> objClass) throws DataAccessException, Exception
+	{
+		SelectQuery query = SelectQuery.newInstance(objClass);
+		query.add(ExpressionUtil.in(BaseEntity.getKeyByClass(objClass), ids.toArray(new Object[0])));
+
+		return (List<T>) BaseEntity.mapToObjs(this.querySqlByCombineSql(query), objClass);
 	}
 
 	public T searchOne(T obj) throws DataAccessException, Exception
