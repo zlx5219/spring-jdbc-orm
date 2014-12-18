@@ -253,4 +253,26 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T>
 			return null;
 		}
 	}
+
+	public int delete(Serializable id) throws DataAccessException, Exception
+	{
+		CombineSql comSql = CombineSqlUtils.createDelete(getObjClass(), id);
+		return this.updateSqlByCombineSql(comSql);
+	}
+
+	public T load(Serializable id) throws DataAccessException, Exception
+	{
+		CombineSql comSql = CombineSqlUtils.createLoad(getObjClass(), id);
+		return BaseEntity.mapToObj(this.loadSqlByCombineSql(comSql), getObjClass());
+	}
+
+	public List<T> searchByIds(Collection<Serializable> ids) throws DataAccessException, Exception
+	{
+		SelectQuery query = SelectQuery.newInstance(getObjClass());
+		query.add(ExpressionUtil.in(BaseEntity.getKeyByClass(getObjClass(), true), ids.toArray(new Object[0])));
+
+		return (List<T>) BaseEntity.mapToObjs(this.querySqlByCombineSql(query), getObjClass());
+	}
+
+	protected abstract Class<T> getObjClass();
 }

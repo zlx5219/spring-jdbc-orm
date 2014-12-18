@@ -46,4 +46,10 @@ public interface BaseService<T>
 	public List<T> search(T obj, int currentPage, int numPerPage, Order... orders) throws ServiceException;
 
 	public PageInfo searchPage(T obj, int currentPage, int numPerPage) throws ServiceException;
+
+	public int delete(Serializable id) throws ServiceException;
+
+	public T load(Serializable id) throws ServiceException;
+
+	public List<T> searchByIds(Collection<Serializable> ids) throws ServiceException;
 }

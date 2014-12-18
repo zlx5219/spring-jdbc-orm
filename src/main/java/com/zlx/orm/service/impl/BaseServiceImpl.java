@@ -169,4 +169,40 @@ public abstract class BaseServiceImpl<T> implements BaseService<T>
 			throw new ServiceException(e);
 		}
 	}
+
+	public int delete(Serializable id) throws ServiceException
+	{
+		try
+		{
+			return baseDao.delete(id);
+		}
+		catch (Exception e)
+		{
+			throw new ServiceException(e);
+		}
+	}
+
+	public T load(Serializable id) throws ServiceException
+	{
+		try
+		{
+			return baseDao.load(id);
+		}
+		catch (Exception e)
+		{
+			throw new ServiceException(e);
+		}
+	}
+
+	public List<T> searchByIds(Collection<Serializable> ids) throws ServiceException
+	{
+		try
+		{
+			return baseDao.searchByIds(ids);
+		}
+		catch (Exception e)
+		{
+			throw new ServiceException(e);
+		}
+	}
 }

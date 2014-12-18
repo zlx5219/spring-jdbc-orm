@@ -32,4 +32,10 @@ public interface BaseDao<T>
 	public List<T> search(T obj, int currentPage, int numPerPage, Order... orders) throws Exception;
 
 	public PageInfo searchPage(T obj, int currentPage, int numPerPage) throws Exception;
+
+	public int delete(Serializable id) throws Exception;
+
+	public T load(Serializable id) throws Exception;
+
+	public List<T> searchByIds(Collection<Serializable> ids) throws DataAccessException, Exception;
 }
