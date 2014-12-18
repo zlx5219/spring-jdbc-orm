@@ -1,6 +1,8 @@
 package com.zlx.orm.dao.impl;
 
 import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -274,5 +276,16 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T>
 		return (List<T>) BaseEntity.mapToObjs(this.querySqlByCombineSql(query), getObjClass());
 	}
 
-	protected abstract Class<T> getObjClass();
+	protected Class<T> entityClass = null;
+	@SuppressWarnings("unchecked")
+	protected Class<T> getObjClass()
+	{
+		if (entityClass != null)
+			return entityClass;
+		Type type = getClass().getGenericSuperclass();  
+        Type[] trueType = ((ParameterizedType) type).getActualTypeArguments();
+        this.entityClass = (Class<T>) trueType[0];
+
+        return entityClass;
+	}
 }

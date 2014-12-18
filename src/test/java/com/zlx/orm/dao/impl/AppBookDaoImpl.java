@@ -12,10 +12,4 @@ import com.zlx.orm.po.AppBook;
 @Repository("appBookDao")
 public class AppBookDaoImpl extends BaseDaoImpl<AppBook> implements AppBookDao
 {
-	@Override
-	protected Class<AppBook> getObjClass()
-	{
-		return AppBook.class;
-	}
-
 }
