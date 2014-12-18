@@ -85,7 +85,7 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T>
 	public List<T> searchByIds(Collection<Serializable> ids, Class<T> objClass) throws DataAccessException, Exception
 	{
 		SelectQuery query = SelectQuery.newInstance(objClass);
-		query.add(ExpressionUtil.in(BaseEntity.getKeyByClass(objClass), ids.toArray(new Object[0])));
+		query.add(ExpressionUtil.in(BaseEntity.getKeyByClass(objClass, true), ids.toArray(new Object[0])));
 
 		return (List<T>) BaseEntity.mapToObjs(this.querySqlByCombineSql(query), objClass);
 	}

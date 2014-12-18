@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -223,16 +225,18 @@ public abstract class BaseEntity implements Serializable
 	}
 
 	/**
-	 * 获取实体主键数据库字段名称。
+	 * 获取实体主键或数据库字段主键名称。
 	 * @param objClass
+	 * @param isDataColumn true 返回数据库对应列名  false 返回属性列名。
 	 * @return
 	 * @throws Exception
 	 */
-	public static <T> String getKeyByClass(Class<T> objClass) throws Exception
+	public static <T> String getKeyByClass(Class<T> objClass, boolean isDataColumn) throws Exception
 	{
 		Field[] lstField = objClass.getDeclaredFields();
 		TableColumn column = null;
-		String fieldName = null;
+		String objColumn = null;
+		String dataColumn = null;
 		for (Field f : lstField)
 		{
 			column = f.getAnnotation(TableColumn.class);
@@ -240,14 +244,34 @@ public abstract class BaseEntity implements Serializable
 				continue;
 			if (column.isKey())
 			{
-				fieldName = column.value();
-				if (fieldName == null || "".equals(fieldName))
-					fieldName = f.getName();
+				objColumn = f.getName();
+				dataColumn = column.value();
+				if (dataColumn == null || "".equals(dataColumn))
+					dataColumn = objColumn;
 				break;
 			}
 		}
-		if (fieldName == null || "".equals(fieldName))
+		if (objColumn == null || "".equals(objColumn))
 			throw new Exception("Entity primary key not found");
-		return fieldName;
+		return isDataColumn ?  dataColumn : objColumn;
+	}
+
+	/**
+	 * 获取主键的值。
+	 * @param lst
+	 * @param objClass
+	 * @return
+	 * @throws Exception
+	 */
+	public static <T> Collection<Serializable> getKeysValues(List<T> lst, Class<T> objClass) throws Exception
+	{
+		Collection<Serializable> lstResult = new LinkedHashSet<Serializable>();
+		String objColumn = getKeyByClass(objClass, false);
+
+		for (T t : lst)
+		{
+			lstResult.add((Serializable)getter(t, objColumn));
+		}
+		return lstResult;
 	}
 }
