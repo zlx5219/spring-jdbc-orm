@@ -177,7 +177,7 @@ public class SelectQuery implements Serializable, CombineSql
 
 		TableColumn column = null;
 		String key = null;
-		lstParam = new ArrayList<Object>();
+		//lstParam = new ArrayList<Object>();
 
 		for (Field f : fields)
 		{
