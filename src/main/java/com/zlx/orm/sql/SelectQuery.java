@@ -21,8 +21,8 @@ public class SelectQuery implements Serializable, CombineSql
 	private static final long serialVersionUID = 8541922853046624474L;
 	private List<Expression> lstExp;
 	private List<Order> lstOrder;
-	private Integer maxResults;
-	private Integer firstResult;
+	private int maxResults;
+	private int firstResult;
 	private String[] showColumns;
 	private Class<?> objClass;
 	private String tableName;
