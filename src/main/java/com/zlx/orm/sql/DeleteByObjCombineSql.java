@@ -13,9 +13,9 @@ import com.zlx.orm.annotation.TableColumn;
  *
  * @param <T>
  */
-public class DeleteQueryCombineSql<T> extends BaseCombineSql<T> implements CombineSql
+public class DeleteByObjCombineSql<T> extends BaseCombineSql<T> implements CombineSql
 {
-	public DeleteQueryCombineSql(T obj)
+	public DeleteByObjCombineSql(T obj)
 	{
 		super(obj.getClass());
 		this.obj = obj;
@@ -25,7 +25,7 @@ public class DeleteQueryCombineSql<T> extends BaseCombineSql<T> implements Combi
 	public String getSql() throws Exception
 	{
 		sql = new StringBuffer();
-		sql.append("delete from ").append(this.getTableName()).append(" ").append(this.getKeyWhere());
+		sql.append("delete from ").append(this.getTableName()).append(" ").append(this.getWhere());
 
 		return sql.toString();
 	}

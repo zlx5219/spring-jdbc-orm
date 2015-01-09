@@ -31,9 +31,9 @@ public class CombineSqlUtils
 		return new DeleteCombineSql<T>(objClass, id);
 	}
 
-	public static <T> CombineSql createDeleteQuery(T obj)
+	public static <T> CombineSql createDeleteByObj(T obj)
 	{
-		return new DeleteQueryCombineSql<T>(obj);
+		return new DeleteByObjCombineSql<T>(obj);
 	}
 
 	public static <T> CombineSql createLoad(Class<T> objClass, Serializable id)

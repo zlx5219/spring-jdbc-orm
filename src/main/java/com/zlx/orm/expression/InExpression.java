@@ -30,8 +30,8 @@ public class InExpression implements Expression
 	public String toSql()
 	{
 		criteria.append(' ').append(this.propertyName).append(' ').append("in ");
-		if (values.length == 1)
-			return criteria.append('(').append(values[0]).append(')').toString();
+//		if (values.length == 1)
+//			return criteria.append('(').append(values[0]).append(')').toString();
 		criteria.append('(');
 		for (int n = 0; n < values.length - 1; n++)
 			criteria.append('?').append(',');
