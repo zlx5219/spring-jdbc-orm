@@ -38,7 +38,7 @@ public abstract class BaseEntity implements Serializable
 		if (map == null || objClass == null)
 			return null;
 		
-		Field[] fields = objClass.getDeclaredFields();
+		Field[] fields = getFieldByClass(objClass);
 		T obj = null;
 
 		try
@@ -125,7 +125,7 @@ public abstract class BaseEntity implements Serializable
 		if (map == null || obj == null)
 			return null;
 
-		Field[] fields = obj.getClass().getDeclaredFields();
+		Field[] fields = getFieldByClass(obj.getClass());
 
 		setFieldValue(map, obj, fields, false);
 		return obj;
@@ -188,7 +188,7 @@ public abstract class BaseEntity implements Serializable
 	 */
 	public <T> Map<String, Object> objToMap(T obj)
 	{
-		Field[] fields = obj.getClass().getDeclaredFields();
+		Field[] fields = getFieldByClass(obj.getClass());
 		TableColumn column = null;
 		Object value = null;
 		String key = null;
@@ -233,7 +233,7 @@ public abstract class BaseEntity implements Serializable
 	 */
 	public static <T> String getKeyByClass(Class<T> objClass, boolean isDataColumn) throws Exception
 	{
-		Field[] lstField = objClass.getDeclaredFields();
+		Field[] lstField = getFieldByClass(objClass);
 		TableColumn column = null;
 		String objColumn = null;
 		String dataColumn = null;
@@ -273,5 +273,40 @@ public abstract class BaseEntity implements Serializable
 			lstResult.add((Serializable)getter(t, objColumn));
 		}
 		return lstResult;
+	}
+
+	/**
+	 * 获取所有成员变量（包括继承的私有成员变量）
+	 * @param objClass
+	 * @return
+	 */
+	public static Field[] getFieldByClass(Class<?> objClass)
+	{
+		List<Field> lstField = new ArrayList<Field>();
+		Field[] tempField = null;
+		if (objClass == null || objClass.getDeclaredFields() == null || objClass.equals(Object.class))
+			return null;
+		if (objClass.getSuperclass() != null)
+		{
+			tempField = getFieldByClass(objClass.getSuperclass());
+			if (tempField != null)
+			{
+				for (Field f : tempField)
+				{
+					if (!f.getName().equals("serialVersionUID"))
+						lstField.add(f);
+				}
+			}
+		}
+		tempField = objClass.getDeclaredFields();
+		if (tempField != null)
+		{
+			for (Field f : tempField)
+			{
+				if (!f.getName().equals("serialVersionUID"))
+					lstField.add(f);
+			}
+		}
+		return lstField.toArray(new Field[0]);
 	}
 }

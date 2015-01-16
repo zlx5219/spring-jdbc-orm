@@ -29,37 +29,7 @@ public abstract class BaseCombineSql<T> implements CombineSql
 	{
 		this.objClass = objClass;
 		//this.obj = obj;
-		fields = getFieldByClass(objClass);
-	}
-	
-	public Field[] getFieldByClass(Class<?> objClass)
-	{
-		List<Field> lstField = new ArrayList<Field>();
-		Field[] tempField = null;
-		if (objClass == null || objClass.getDeclaredFields() == null || objClass.equals(Object.class))
-			return null;
-		if (objClass.getSuperclass() != null)
-		{
-			tempField = getFieldByClass(objClass.getSuperclass());
-			if (tempField != null)
-			{
-				for (Field f : tempField)
-				{
-					if (!f.getName().equals("serialVersionUID"))
-						lstField.add(f);
-				}
-			}
-		}
-		tempField = objClass.getDeclaredFields();
-		if (tempField != null)
-		{
-			for (Field f : tempField)
-			{
-				if (!f.getName().equals("serialVersionUID"))
-					lstField.add(f);
-			}
-		}
-		return lstField.toArray(new Field[0]);
+		fields = BaseEntity.getFieldByClass(objClass);
 	}
 
 	/**
