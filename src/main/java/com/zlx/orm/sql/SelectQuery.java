@@ -194,9 +194,7 @@ public class SelectQuery implements Serializable, CombineSql
 
 	private StringBuffer getLimit(StringBuffer sql)
 	{
-		if (this.maxResults == 0 || this.maxResults <= this.firstResult)
-			return sql;
-		if (this.maxResults <= this.firstResult)
+		if (this.maxResults == 0 || this.firstResult < 0)
 			return sql;
 
 		sql.append(" limit ").append(this.firstResult).append(',').append(this.maxResults);

@@ -73,7 +73,7 @@ public class DeleteByObjCombineSql<T> extends BaseCombineSql<T> implements Combi
 
 			value = BaseEntity.getter(obj, f.getName());
 			if (!this.valdateParamDefault(value))
-				throw new Exception("key value is null");
+				continue;
 			lstParam.add(value);
 			sql.append(" and ").append(key).append(" = ").append("? ");
 			break;
